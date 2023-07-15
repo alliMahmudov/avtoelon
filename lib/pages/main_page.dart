@@ -1,6 +1,5 @@
+import 'package:avtoelon/pages/details_page.dart';
 import 'package:flutter/material.dart';
-
-import '../models/cars_model.dart';
 import '../models/cars_model.dart';
 
 class MainPage extends StatefulWidget {
@@ -30,7 +29,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
         appBar: AppBar(
           title: const Text("Avtoelon"),
           actions: const [
@@ -61,95 +59,96 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget myCard(Cars car) {
-    return Card(
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.all(4),
-                height: 120,
-                width: 160,
-                child: Image.asset(
-                  car.picture!,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 8),
-                    child: Text(
-                      car.model!,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      const TextSpan(
-                          text: "year: ",
-                          style: TextStyle(color: Colors.black)),
-                      TextSpan(
-                          text: "${car.year}  ",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      const TextSpan(
-                          text: "color: ",
-                          style: TextStyle(color: Colors.black)),
-                      TextSpan(
-                        text: "${car.color}",
-                        style: TextStyle(
-                            color: Colors.blue.shade900,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ]),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      const TextSpan(
-                          text: "mileage: ",
-                          style: TextStyle(color: Colors.black)),
-                      TextSpan(
-                          text: "${car.mileage}  ",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold)),
-                    ]),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  RichText(
-                    text: TextSpan(children: [
-                      const TextSpan(
-                          text: "Cost: ",
-                          style: TextStyle(color: Colors.black)),
-                      TextSpan(
-                          text: "\$${car.cost} ",
-                          style: const TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16)),
-                    ]),
-                  ),
-                ],
-              )
-            ],
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPage(car: car),
           ),
-        ],
+        );
+      },
+      child: Card(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.all(4),
+              height: 120,
+              width: 160,
+              child: Image.asset(
+                car.picture!,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    car.model!,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                RichText(
+                  text: TextSpan(children: [
+                    const TextSpan(
+                        text: "year: ", style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                        text: "${car.year}  ",
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold)),
+                    const TextSpan(
+                        text: "color: ", style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                      text: "${car.color}",
+                      style: TextStyle(
+                          color: Colors.blue.shade900,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ]),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                RichText(
+                  text: TextSpan(children: [
+                    const TextSpan(
+                        text: "mileage: ",
+                        style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                        text: "${car.mileage}  ",
+                        style: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold)),
+                  ]),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                RichText(
+                  text: TextSpan(children: [
+                    const TextSpan(
+                        text: "Cost: ", style: TextStyle(color: Colors.black)),
+                    TextSpan(
+                        text: "\$${car.cost} ",
+                        style: const TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16)),
+                  ]),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
